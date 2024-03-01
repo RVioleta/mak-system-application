@@ -82,10 +82,16 @@ const AssetPlatforms = () => {
   const [newDataLenght, setNewDataLenght] = useState(0);
 
   useEffect(() => {
-    axios
-      .get(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=10&page=1&x_cg_demo_api_key=CG-AZbLFjBeCK6AXzm7s5HNe7M3"
-      )
+    const api_key = process.env.REACT_APP_API_KEY
+
+      axios.get("https://api.coingecko.com/api/v3/coins/markets", {
+          params: {
+            vs_currency: "usd",
+            per_page: 10,
+            page: 1,
+            x_cg_demo_api_key: api_key,
+          },
+        })
       .then(function (response) {
         setCoinsData(response.data);
         setCoinsData2(response.data);
